@@ -1,0 +1,3 @@
+kpeu3i_jwt_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: Kpeu3iJwtBundle:Default:index }
