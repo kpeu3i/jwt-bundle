@@ -1,3 +1,3 @@
-kpeu3i_jwt_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: Kpeu3iJwtBundle:Default:index }
+kpeu3i_jwt_get:
+    path:   /api/login
+    defaults:     { _controller: "Kpeu3iJwtBundle:Jwt:getToken" }

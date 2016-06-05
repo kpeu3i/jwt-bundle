@@ -1,4 +1,111 @@
+parameters:
+    kpeu3i_jwt.security.authentication.listener.jwt.class: Kpeu3i\JwtBundle\Security\Firewall\JwtListener
+    kpeu3i_jwt.security.authentication.provider.jwt.class: Kpeu3i\JwtBundle\Security\Authentication\Provider\JwtProvider
+
+    kpeu3i_jwt.security.authentication.listener.jwt_creation.class: Kpeu3i\JwtBundle\Security\Firewall\JwtCreationListener
+    kpeu3i_jwt.security.authentication.provider.jwt_creation.class: Kpeu3i\JwtBundle\Security\Authentication\Provider\JwtCreationProvider
+
+    kpeu3i_jwt.security.authentication.manager.class: Kpeu3i\JwtBundle\Security\Core\AuthenticationManager
+
+    kpeu3i_jwt.credentials.extractor.body_json.class: Kpeu3i\JwtBundle\Jwt\Extractor\Credentials\BodyJsonCredentialsExtractor
+    kpeu3i_jwt.username.extractor.class: Kpeu3i\JwtBundle\Jwt\Extractor\Username\UsernameExtractor
+    kpeu3i_jwt.token.extractor.headers.class: Kpeu3i\JwtBundle\Jwt\Extractor\Token\HeadersJwtTokenExtractor
+
+    kpeu3i_jwt.factory.class: Kpeu3i\JwtBundle\Jwt\Claim\Factory\ClaimFactory
+    kpeu3i_jwt.claim.factory.class: Kpeu3i\JwtBundle\Jwt\Claim\Factory\ClaimFactory
+
+    kpeu3i_jwt.encoder.class: Kpeu3i\JwtBundle\Jwt\Codec\Encoder\JwtEncoder
+    kpeu3i_jwt.decoder.class: Kpeu3i\JwtBundle\Jwt\Codec\Decoder\JwtDecoder
+
 services:
-#    kpeu3i_jwt.example:
-#        class: Kpeu3i\JwtBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    kpeu3i_jwt.security.authentication.manager:
+        class: "%kpeu3i_jwt.security.authentication.manager.class%"
+        parent: security.authentication.manager
+        public: true
+        calls:
+            - [setEventDispatcher, ["@event_dispatcher"]]
+
+    kpeu3i_jwt.security.authentication.listener.jwt_creation:
+        class: "%kpeu3i_jwt.security.authentication.listener.jwt_creation.class%"
+        arguments:
+            - "@security.token_storage"
+            - "@security.authentication.manager"
+            - ""
+            - "@event_dispatcher"
+            - ""
+
+    kpeu3i_jwt.security.authentication.provider.jwt_creation:
+        class: "%kpeu3i_jwt.security.authentication.provider.jwt_creation.class%"
+        arguments:
+            - ""
+            - "@security.user_checker"
+            - "@security.encoder_factory"
+            - ""
+            - ""
+            - "@event_dispatcher"
+            - ""
+            - ""
+            - "@property_accessor"
+            - "%security.authentication.hide_user_not_found%"
+
+    kpeu3i_jwt.security.authentication.listener.jwt:
+        class: "%kpeu3i_jwt.security.authentication.listener.jwt.class%"
+        arguments:
+            - "@security.token_storage"
+            - "@security.authentication.manager"
+            - "@event_dispatcher"
+            - ""
+
+    kpeu3i_jwt.security.authentication.provider.jwt:
+        class: "%kpeu3i_jwt.security.authentication.provider.jwt.class%"
+        arguments:
+            - ""
+            - ""
+            - ""
+            - "@event_dispatcher"
+
+    kpeu3i_jwt.credentials.extractor.body_json:
+        public: false
+        class: "%kpeu3i_jwt.credentials.extractor.body_json.class%"
+        arguments:
+            - ""
+            - ""
+
+    kpeu3i_jwt.username.extractor:
+        public: false
+        class: "%kpeu3i_jwt.username.extractor.class%"
+        arguments:
+            - ""
+
+    kpeu3i_jwt.token.extractor.headers:
+        public: false
+        class: "%kpeu3i_jwt.token.extractor.headers.class%"
+        arguments:
+            - ""
+            - ""
+
+    kpeu3i_jwt.factory:
+        public: false
+        class: "%kpeu3i_jwt.factory.class%"
+
+    kpeu3i_jwt.claim.factory:
+        public: false
+        class: "%kpeu3i_jwt.claim.factory.class%"
+
+    kpeu3i_jwt.encoder:
+        public: false
+        class: "%kpeu3i_jwt.encoder.class%"
+        arguments:
+            - ""
+            - ""
+            - ""
+            - ""
+
+    kpeu3i_jwt.decoder:
+        public: false
+        class: "%kpeu3i_jwt.decoder.class%"
+        arguments:
+            - ""
+            - ""
+            - ""
+            - ""
