@@ -54,54 +54,7 @@ class JwtListener implements ListenerInterface
     public function handle(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-
         $jwt = $this->tokenExtractor->extract($request);
-//
-//        $iss = Claim::createIss('http://example.com');
-//        $aud = Claim::createAud('http://example.org');
-//        $jti = Claim::createJti('4f1g23a12aa');
-//        $iat = Claim::createIat(time());
-//        $exp = Claim::createExp(time() + 883600);
-//        $usr = Claim::create('usr', ['username' => 'admin']);
-//
-//        $claims = new ClaimCollection();
-//        $claims
-//            ->set($iss)
-//            ->set($aud)
-//            ->set($jti)
-//            ->set($iat)
-//            ->set($exp)
-//            ->set($usr)
-//        ;
-//
-//        $validationClaims = new ClaimCollection();
-//        $validationClaims
-//            ->set($iss)
-//            ->set($aud)
-//            ->set($jti)
-//        ;
-//
-//        $jwt = $this->jwtManager->encode($claims);
-//
-//        print_r($jwt);
-//
-//        print_r("\n");
-//        print_r("\n");
-//        print_r("\n");
-//
-//        try {
-//            $d = $this->jwtManager->decode($jwt, $validationClaims);
-//        } catch (\Exception $e) {
-//            $d = $e->getMessage();
-//        }
-//
-//        print_r($d);
-
-
-        //print_r($this->jwtManager->decode('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9leGFtcGxlLmNvbSIsImF1ZCI6Imh0dHA6XC9cL2V4YW1wbGUub3JnIiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE0NjI0NzI3NzUsIm5iZiI6MTQ2MjQ3MjgzNSwiZXhwIjoxNDYyNDc2Mzc1LCJ1aWQiOjF9.Cu9gUz13nnLiTnwb6xtWatnOyDp35TfE9I3dtJ-V5vQ'));
-        //print_r($this->jwtManager->decode('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W10.n2s6rPl4Q0XjK2oOWIgzgu9W0kT7I4rYxKM2dewbjr0'));
-        //print_r($this->jwtManager->decode($jwt, ValidationClaims::create()));
-
         $token = new JwtRawToken($jwt);
 
         try {
