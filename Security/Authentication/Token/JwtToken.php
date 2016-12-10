@@ -6,6 +6,11 @@ use Kpeu3i\JwtBundle\Jwt\Claim\ClaimCollectionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * Class JwtToken
+ *
+ * @package Kpeu3i\JwtBundle\Security\Authentication\Token
+ */
 class JwtToken extends AbstractToken
 {
     /**
@@ -18,6 +23,11 @@ class JwtToken extends AbstractToken
      */
     protected $jwt;
 
+    /**
+     * @param UserInterface $user
+     * @param $jwt string
+     * @param ClaimCollectionInterface $claims
+     */
     public function __construct(UserInterface $user, $jwt, ClaimCollectionInterface $claims)
     {
         $this->setUser($user);

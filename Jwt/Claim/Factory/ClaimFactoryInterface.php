@@ -5,6 +5,11 @@ namespace Kpeu3i\JwtBundle\Jwt\Claim\Factory;
 use Kpeu3i\JwtBundle\Jwt\Claim\ClaimCollectionInterface;
 use Kpeu3i\JwtBundle\Jwt\Claim\ClaimInterface;
 
+/**
+ * Interface ClaimFactoryInterface
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Claim\Factory
+ */
 interface ClaimFactoryInterface
 {
     /**

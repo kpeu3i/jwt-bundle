@@ -2,6 +2,11 @@
 
 namespace Kpeu3i\JwtBundle\Exception;
 
+/**
+ * Class InvalidTokenException
+ *
+ * @package Kpeu3i\JwtBundle\Exception
+ */
 class InvalidTokenException extends \Exception
 {
     /**

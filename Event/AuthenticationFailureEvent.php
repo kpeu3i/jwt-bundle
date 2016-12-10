@@ -7,6 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
+/**
+ * Class AuthenticationFailureEvent
+ *
+ * @package Kpeu3i\JwtBundle\Event
+ */
 class AuthenticationFailureEvent extends Event
 {
     /**
@@ -24,7 +29,16 @@ class AuthenticationFailureEvent extends Event
      */
     protected $authenticationException;
 
-    public function __construct(Request $request, Response $response, AuthenticationException $authenticationException)
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param AuthenticationException $authenticationException
+     */
+    public function __construct(
+        Request $request,
+        Response $response,
+        AuthenticationException $authenticationException
+    )
     {
         $this->request = $request;
         $this->response = $response;
@@ -55,6 +69,9 @@ class AuthenticationFailureEvent extends Event
         $this->response = $response;
     }
 
+    /**
+     * @return AuthenticationException
+     */
     public function getAuthenticationException()
     {
         return $this->authenticationException;

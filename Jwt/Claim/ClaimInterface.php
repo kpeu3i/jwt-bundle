@@ -2,6 +2,11 @@
 
 namespace Kpeu3i\JwtBundle\Jwt\Claim;
 
+/**
+ * Interface ClaimInterface
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Claim
+ */
 interface ClaimInterface
 {
     const CLAIM_NAME_JTI = 'jti';
@@ -12,9 +17,19 @@ interface ClaimInterface
     const CLAIM_NAME_NBF = 'nbf';
     const CLAIM_NAME_EXP = 'exp';
 
+    /**
+     * @return mixed
+     */
     public function getName();
 
+    /**
+     * @return mixed
+     */
     public function getValue();
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function setValue($value);
 }

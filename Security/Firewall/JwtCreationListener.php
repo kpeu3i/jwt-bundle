@@ -16,6 +16,11 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 
+/**
+ * Class JwtCreationListener
+ *
+ * @package Kpeu3i\JwtBundle\Security\Firewall
+ */
 class JwtCreationListener implements ListenerInterface
 {
     /**
@@ -43,6 +48,14 @@ class JwtCreationListener implements ListenerInterface
      */
     protected $dispatcher;
 
+    /**
+     * JwtCreationListener constructor.
+     * @param TokenStorageInterface $tokenStorage
+     * @param AuthenticationManagerInterface $authenticationManager
+     * @param CredentialsExtractorInterface $credentialsExtractor
+     * @param EventDispatcherInterface $dispatcher
+     * @param $providerKey
+     */
     public function __construct (
         TokenStorageInterface $tokenStorage,
         AuthenticationManagerInterface $authenticationManager,
@@ -58,6 +71,9 @@ class JwtCreationListener implements ListenerInterface
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * @param GetResponseEvent $event
+     */
     public function handle(GetResponseEvent $event)
     {
         $request = $event->getRequest();

@@ -6,13 +6,28 @@ use Kpeu3i\JwtBundle\Jwt\Claim\Claim;
 use Kpeu3i\JwtBundle\Jwt\Claim\ClaimCollection;
 use Kpeu3i\JwtBundle\Jwt\Claim\ClaimInterface;
 
+/**
+ * Class ClaimFactory
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Claim\Factory
+ */
 class ClaimFactory implements ClaimFactoryInterface
 {
+    /**
+     * @param $name
+     * @param $value
+     * @return Claim
+     */
     public function createClaim($name, $value)
     {
         return new Claim($name, $value);
     }
 
+    /**
+     * @param array $values
+     * @param int|null $ttl
+     * @return ClaimCollection
+     */
     public function createClaimCollection(array $values = [], $ttl = null)
     {
         $claims = new ClaimCollection();

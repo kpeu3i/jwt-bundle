@@ -2,6 +2,11 @@
 
 namespace Kpeu3i\JwtBundle\Jwt\Claim;
 
+/**
+ * Class AbstractClaim
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Claim
+ */
 abstract class AbstractClaim implements ClaimInterface
 {
     /**
@@ -14,6 +19,10 @@ abstract class AbstractClaim implements ClaimInterface
      */
     protected $value;
 
+    /**
+     * @param $name
+     * @param $value
+     */
     public function __construct($name, $value)
     {
         $this
@@ -22,11 +31,18 @@ abstract class AbstractClaim implements ClaimInterface
         ;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param $name
+     * @return $this
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -34,11 +50,18 @@ abstract class AbstractClaim implements ClaimInterface
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+    /**
+     * @param $value
+     * @return $this
+     */
     public function setValue($value)
     {
         $this->value = $value;

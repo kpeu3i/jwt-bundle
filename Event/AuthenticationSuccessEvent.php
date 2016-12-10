@@ -7,6 +7,11 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AuthenticationSuccessEvent
+ *
+ * @package Kpeu3i\JwtBundle\Event
+ */
 class AuthenticationSuccessEvent extends Event
 {
     /**
@@ -24,6 +29,11 @@ class AuthenticationSuccessEvent extends Event
      */
     protected $token;
 
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param JwtToken $token
+     */
     public function __construct(Request $request, Response $response, JwtToken $token)
     {
         $this->request = $request;

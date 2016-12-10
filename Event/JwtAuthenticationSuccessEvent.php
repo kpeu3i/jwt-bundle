@@ -6,6 +6,11 @@ use Kpeu3i\JwtBundle\Security\Authentication\Token\JwtToken;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class JwtAuthenticationSuccessEvent
+ *
+ * @package Kpeu3i\JwtBundle\Event
+ */
 class JwtAuthenticationSuccessEvent extends Event
 {
     /**
@@ -18,6 +23,10 @@ class JwtAuthenticationSuccessEvent extends Event
      */
     protected $token;
 
+    /**
+     * @param Request $request
+     * @param JwtToken $token
+     */
     public function __construct(Request $request, JwtToken $token)
     {
         $this->request = $request;

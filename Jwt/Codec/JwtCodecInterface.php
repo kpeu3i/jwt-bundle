@@ -2,6 +2,11 @@
 
 namespace Kpeu3i\JwtBundle\Jwt\Codec;
 
+/**
+ * Interface JwtCodecInterface
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Codec
+ */
 interface JwtCodecInterface
 {
     // HMAC

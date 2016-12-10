@@ -15,6 +15,11 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * Class JwtProvider
+ *
+ * @package Kpeu3i\JwtBundle\Security\Authentication\Provider
+ */
 class JwtProvider implements AuthenticationProviderInterface
 {
     /**
@@ -37,6 +42,12 @@ class JwtProvider implements AuthenticationProviderInterface
      */
     protected $dispatcher;
 
+    /**
+     * @param UserProviderInterface $userProvider
+     * @param UsernameExtractorInterface $usernameExtractor
+     * @param JwtDecoderInterface $decoder
+     * @param EventDispatcherInterface $dispatcher
+     */
     public function __construct(
         UserProviderInterface $userProvider,
         UsernameExtractorInterface $usernameExtractor,
@@ -50,6 +61,10 @@ class JwtProvider implements AuthenticationProviderInterface
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * @param TokenInterface $token
+     * @return JwtToken
+     */
     public function authenticate(TokenInterface $token)
     {
         /* @var JwtRawToken $token */
@@ -74,6 +89,10 @@ class JwtProvider implements AuthenticationProviderInterface
         throw new AuthenticationException();
     }
 
+    /**
+     * @param TokenInterface $token
+     * @return bool
+     */
     public function supports(TokenInterface $token)
     {
         return $token instanceof JwtRawToken;

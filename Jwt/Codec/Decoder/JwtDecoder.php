@@ -6,8 +6,19 @@ use Kpeu3i\JwtBundle\Exception\InvalidTokenException;
 use Kpeu3i\JwtBundle\Jwt\Claim\ClaimCollectionInterface;
 use Kpeu3i\JwtBundle\Jwt\Codec\AbstractJwtCodec;
 
+/**
+ * Class JwtDecoder
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Codec\Decoder
+ */
 class JwtDecoder extends AbstractJwtCodec implements JwtDecoderInterface
 {
+    /**
+     * @param string $jwt
+     * @param ClaimCollectionInterface|null $validationClaims
+     * @return ClaimCollectionInterface|null
+     * @throws InvalidTokenException
+     */
     public function decode($jwt, ClaimCollectionInterface $validationClaims = null)
     {
         $key = $this->createKey($this->key, $this->passphrase);

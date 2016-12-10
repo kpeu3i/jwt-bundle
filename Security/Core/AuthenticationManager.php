@@ -8,6 +8,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
+/**
+ * Class AuthenticationManager
+ *
+ * @package Kpeu3i\JwtBundle\Security\Core
+ */
 class AuthenticationManager extends BaseAuthenticationProviderManager
 {
     /**
@@ -30,17 +35,28 @@ class AuthenticationManager extends BaseAuthenticationProviderManager
      */
     protected $eventDispatcher;
 
+    /**
+     * @param array $providers
+     * @param bool $eraseCredentials
+     */
     public function __construct(array $providers = [], $eraseCredentials = true)
     {
         $this->providers = $providers;
         $this->eraseCredentials = (bool)$eraseCredentials;
     }
 
+    /**
+     * @param TokenInterface $token
+     * @return null|TokenInterface
+     */
     public function authenticate(TokenInterface $token)
     {
         return $this->getManager()->authenticate($token);
     }
 
+    /**
+     * @return AuthenticationManagerInterface|BaseAuthenticationProviderManager
+     */
     protected function getManager()
     {
         if ($this->manager === null) {
@@ -105,6 +121,10 @@ class AuthenticationManager extends BaseAuthenticationProviderManager
         return $this;
     }
 
+    /**
+     * @param EventDispatcherInterface $dispatcher
+     * @return $this
+     */
     public function setEventDispatcher(EventDispatcherInterface $dispatcher)
     {
         $this->eventDispatcher = $dispatcher;

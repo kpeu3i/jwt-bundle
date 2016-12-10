@@ -2,6 +2,11 @@
 
 namespace Kpeu3i\JwtBundle\Jwt\Extractor\Token;
 
+/**
+ * Class AbstractJwtTokenExtractor
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Extractor\Token
+ */
 abstract class AbstractJwtTokenExtractor implements JwtTokenExtractorInterface
 {
     /**
@@ -14,6 +19,10 @@ abstract class AbstractJwtTokenExtractor implements JwtTokenExtractorInterface
      */
     protected $tokenPrefix;
 
+    /**
+     * @param string $parameterName
+     * @param string $tokenPrefix
+     */
     public function __construct($parameterName, $tokenPrefix = '')
     {
         $this
@@ -41,6 +50,12 @@ abstract class AbstractJwtTokenExtractor implements JwtTokenExtractorInterface
         $this->tokenPrefix = (string)$tokenPrefix;
     }
 
+    /**
+     * @param string $str
+     * @param string $prefix
+     * @param mixed|null $default
+     * @return string
+     */
     protected function extractFromString($str, $prefix, $default = null)
     {
         $prefix = (string)$prefix;

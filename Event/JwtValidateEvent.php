@@ -6,6 +6,11 @@ use Kpeu3i\JwtBundle\Jwt\Claim\ClaimCollectionInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * Class JwtValidateEvent
+ *
+ * @package Kpeu3i\JwtBundle\Event
+ */
 class JwtValidateEvent extends Event
 {
     /**
@@ -23,6 +28,11 @@ class JwtValidateEvent extends Event
      */
     protected $claims;
 
+    /**
+     * @param UserInterface $user
+     * @param $jwt
+     * @param ClaimCollectionInterface $claims
+     */
     public function __construct(UserInterface $user, $jwt, ClaimCollectionInterface $claims)
     {
         $this->user = $user;

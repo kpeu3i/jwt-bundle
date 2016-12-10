@@ -10,8 +10,21 @@ use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
 
+/**
+ * Class JwtCreationFactory
+ *
+ * @package Kpeu3i\JwtBundle\DependencyInjection\Security\Factory
+ */
 class JwtCreationFactory implements SecurityFactoryInterface
 {
+    /**
+     * @param ContainerBuilder $container
+     * @param $id
+     * @param $config
+     * @param $userProvider
+     * @param $defaultEntryPoint
+     * @return array
+     */
     public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
     {
         // ClaimFactory
@@ -61,6 +74,9 @@ class JwtCreationFactory implements SecurityFactoryInterface
         return [$providerId, $listenerId, $defaultEntryPoint];
     }
 
+    /**
+     * @param NodeDefinition $node
+     */
     public function addConfiguration(NodeDefinition $node)
     {
         $node
@@ -189,11 +205,17 @@ class JwtCreationFactory implements SecurityFactoryInterface
             ->end();
     }
 
+    /**
+     * @return string
+     */
     public function getPosition()
     {
         return 'pre_auth';
     }
 
+    /**
+     * @return string
+     */
     public function getKey()
     {
         return 'kpeu3i_jwt_creation';

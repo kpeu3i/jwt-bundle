@@ -2,6 +2,11 @@
 
 namespace Kpeu3i\JwtBundle\Jwt\Extractor\Credentials;
 
+/**
+ * Class AbstractCredentialsExtractor
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Extractor\Credentials
+ */
 abstract class AbstractCredentialsExtractor implements CredentialsExtractorInterface
 {
     /**
@@ -14,6 +19,10 @@ abstract class AbstractCredentialsExtractor implements CredentialsExtractorInter
      */
     protected $passwordParameter;
 
+    /**
+     * @param string $usernameParameter
+     * @param string $passwordParameter
+     */
     public function __construct($usernameParameter, $passwordParameter)
     {
         $this

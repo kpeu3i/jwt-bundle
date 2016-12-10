@@ -18,6 +18,11 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * Class JwtCreationProvider
+ *
+ * @package Kpeu3i\JwtBundle\Security\Authentication\Provider
+ */
 class JwtCreationProvider extends DaoAuthenticationProvider
 {
     /**
@@ -50,6 +55,18 @@ class JwtCreationProvider extends DaoAuthenticationProvider
      */
     protected $propertyAccessor;
 
+    /**
+     * @param UserProviderInterface $userProvider
+     * @param UserCheckerInterface $userChecker
+     * @param EncoderFactoryInterface $encoderFactory
+     * @param JwtEncoderInterface $encoder
+     * @param ClaimFactoryInterface $factory
+     * @param EventDispatcherInterface $dispatcher
+     * @param $tokenConfig
+     * @param $providerKey string
+     * @param PropertyAccessorInterface|null $propertyAccessor
+     * @param bool $hideUserNotFoundExceptions
+     */
     public function __construct(
         UserProviderInterface $userProvider,
         UserCheckerInterface $userChecker,
@@ -72,6 +89,10 @@ class JwtCreationProvider extends DaoAuthenticationProvider
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
     }
 
+    /**
+     * @param TokenInterface $token
+     * @return JwtToken
+     */
     public function authenticate(TokenInterface $token)
     {
         $usernamePasswordToken = parent::authenticate($token);
@@ -87,6 +108,10 @@ class JwtCreationProvider extends DaoAuthenticationProvider
         return new JwtToken($user, $jwt, $claims);
     }
 
+    /**
+     * @param UserInterface $user
+     * @return \Kpeu3i\JwtBundle\Jwt\Claim\ClaimCollectionInterface
+     */
     protected function createClaimCollection(UserInterface $user)
     {
         $ttl = isset($this->tokenConfig['ttl']) ? $this->tokenConfig['ttl'] : null;
@@ -110,6 +135,10 @@ class JwtCreationProvider extends DaoAuthenticationProvider
         return $this->factory->createClaimCollection($values,  $ttl);
     }
 
+    /**
+     * @param TokenInterface $token
+     * @return bool
+     */
     public function supports(TokenInterface $token)
     {
         return $token instanceof UsernamePasswordToken;

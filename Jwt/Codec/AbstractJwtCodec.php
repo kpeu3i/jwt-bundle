@@ -15,6 +15,11 @@ use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
 
+/**
+ * Class AbstractJwtCodec
+ *
+ * @package Kpeu3i\JwtBundle\Jwt\Codec
+ */
 class AbstractJwtCodec implements JwtCodecInterface
 {
     /**
@@ -42,6 +47,12 @@ class AbstractJwtCodec implements JwtCodecInterface
      */
     protected $signersCache = [];
 
+    /**
+     * @param string $key
+     * @param null $passphrase
+     * @param string $algorithm
+     * @param ClaimFactoryInterface|null $claimFactory
+     */
     public function __construct(
         $key,
         $passphrase = null,
@@ -98,6 +109,10 @@ class AbstractJwtCodec implements JwtCodecInterface
         return $this;
     }
 
+    /**
+     * @param ClaimFactoryInterface $claimFactory
+     * @return $this
+     */
     public function setClaimFactory(ClaimFactoryInterface $claimFactory)
     {
         $this->claimFactory = $claimFactory;
@@ -105,16 +120,29 @@ class AbstractJwtCodec implements JwtCodecInterface
         return $this;
     }
 
+    /**
+     * @return Parser
+     */
     protected function createParser()
     {
         return new Parser();
     }
 
+    /**
+     * @param string $key
+     * @param string|null $passphrase
+     * @return Key
+     */
     protected function createKey($key, $passphrase = null)
     {
         return new Key($key, $passphrase);
     }
 
+    /**
+     * @param string $algorithm
+     * @return Signer\Ecdsa\Sha256|Signer\Hmac\Sha256|Signer\Hmac\Sha384|Signer\Hmac\Sha512|Signer\Rsa\Sha256|Signer\Rsa\Sha384|Signer\Rsa\Sha512|mixed
+     * @throws UnsupportedAlgorithmException
+     */
     protected function createSigner($algorithm)
     {
         if (isset($this->signersCache[$algorithm])) {
@@ -164,6 +192,10 @@ class AbstractJwtCodec implements JwtCodecInterface
         return $signer;
     }
 
+    /**
+     * @param ClaimCollectionInterface|null $claims
+     * @return Builder
+     */
     protected function createBuilder(ClaimCollectionInterface $claims = null)
     {
         $builder = new Builder();
@@ -178,6 +210,11 @@ class AbstractJwtCodec implements JwtCodecInterface
         return $builder;
     }
 
+    /**
+     * @param ClaimCollectionInterface|null $validationClaims
+     * @return ValidationData
+     * @throws UnsupportedValidationClaimException
+     */
     protected function createValidationData(ClaimCollectionInterface $validationClaims = null)
     {
         $validationData = new ValidationData();
@@ -207,6 +244,10 @@ class AbstractJwtCodec implements JwtCodecInterface
         return $validationData;
     }
 
+    /**
+     * @param Token $token
+     * @return ClaimCollectionInterface
+     */
     protected function createClaimCollection(Token $token)
     {
         $claimCollection = $this->claimFactory->createClaimCollection();
