@@ -28,12 +28,15 @@ public function registerBundles()
 
 #### Configuration
 
+Add default bundle configuration:
+
 ```yaml
 # app/config/config.yml
 
 kpeu3i_jwt: ~
 ```
 
+Configure `firewalls` with "kpeu3i_jwt_creation" and "kpeu3i_jwt" sections in your `security.yml`:
 
 ```yml
 # app/config/security.yml
