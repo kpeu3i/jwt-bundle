@@ -1,7 +1,7 @@
 JwtBundle
 =========
 
-Integrates jwt authentication mechanism into Symfony.
+This bundle integrates JWT authentication mechanism into Symfony.
 
 ## Installation
 
@@ -11,7 +11,7 @@ composer require kpeu3i/jwt-bundle dev-master
 
 #### Enable Bundle
 
-Put in your `AppKernel.php` to enable the bundle
+Put in your `AppKernel.php` to enable the bundle:
 
 ```php
 <?php
