@@ -1,11 +1,9 @@
 parameters:
-    kpeu3i_jwt.security.authentication.listener.jwt.class: Kpeu3i\JwtBundle\Security\Firewall\JwtListener
-    kpeu3i_jwt.security.authentication.provider.jwt.class: Kpeu3i\JwtBundle\Security\Authentication\Provider\JwtProvider
+    kpeu3i_jwt.security.authentication.listener.class: Kpeu3i\JwtBundle\Security\Firewall\JwtListener
+    kpeu3i_jwt.security.authentication.provider.class: Kpeu3i\JwtBundle\Security\Authentication\Provider\JwtProvider
 
-    kpeu3i_jwt.security.authentication.listener.jwt_creation.class: Kpeu3i\JwtBundle\Security\Firewall\JwtCreationListener
-    kpeu3i_jwt.security.authentication.provider.jwt_creation.class: Kpeu3i\JwtBundle\Security\Authentication\Provider\JwtCreationProvider
-
-    kpeu3i_jwt.security.authentication.manager.class: Kpeu3i\JwtBundle\Security\Core\AuthenticationManager
+    kpeu3i_jwt.security.authentication.listener.creation.class: Kpeu3i\JwtBundle\Security\Firewall\JwtCreationListener
+    kpeu3i_jwt.security.authentication.provider.creation.class: Kpeu3i\JwtBundle\Security\Authentication\Provider\JwtCreationProvider
 
     kpeu3i_jwt.credentials.extractor.body_json.class: Kpeu3i\JwtBundle\Jwt\Extractor\Credentials\BodyJsonCredentialsExtractor
     kpeu3i_jwt.username.extractor.class: Kpeu3i\JwtBundle\Jwt\Extractor\Username\UsernameExtractor
@@ -18,15 +16,8 @@ parameters:
     kpeu3i_jwt.decoder.class: Kpeu3i\JwtBundle\Jwt\Codec\Decoder\JwtDecoder
 
 services:
-    kpeu3i_jwt.security.authentication.manager:
-        class: "%kpeu3i_jwt.security.authentication.manager.class%"
-        parent: security.authentication.manager
-        public: true
-        calls:
-            - [setEventDispatcher, ["@event_dispatcher"]]
-
-    kpeu3i_jwt.security.authentication.listener.jwt_creation:
-        class: "%kpeu3i_jwt.security.authentication.listener.jwt_creation.class%"
+    kpeu3i_jwt.security.authentication.listener.creation:
+        class: "%kpeu3i_jwt.security.authentication.listener.creation.class%"
         arguments:
             - "@security.token_storage"
             - "@security.authentication.manager"
@@ -34,8 +25,8 @@ services:
             - "@event_dispatcher"
             - ""
 
-    kpeu3i_jwt.security.authentication.provider.jwt_creation:
-        class: "%kpeu3i_jwt.security.authentication.provider.jwt_creation.class%"
+    kpeu3i_jwt.security.authentication.provider.creation:
+        class: "%kpeu3i_jwt.security.authentication.provider.creation.class%"
         arguments:
             - ""
             - "@security.user_checker"
@@ -48,16 +39,16 @@ services:
             - "@property_accessor"
             - "%security.authentication.hide_user_not_found%"
 
-    kpeu3i_jwt.security.authentication.listener.jwt:
-        class: "%kpeu3i_jwt.security.authentication.listener.jwt.class%"
+    kpeu3i_jwt.security.authentication.listener:
+        class: "%kpeu3i_jwt.security.authentication.listener.class%"
         arguments:
             - "@security.token_storage"
             - "@security.authentication.manager"
             - "@event_dispatcher"
             - ""
 
-    kpeu3i_jwt.security.authentication.provider.jwt:
-        class: "%kpeu3i_jwt.security.authentication.provider.jwt.class%"
+    kpeu3i_jwt.security.authentication.provider:
+        class: "%kpeu3i_jwt.security.authentication.provider.class%"
         arguments:
             - ""
             - ""

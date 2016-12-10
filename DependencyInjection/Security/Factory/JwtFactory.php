@@ -58,9 +58,9 @@ class JwtFactory implements SecurityFactoryInterface
         ;
 
         // Provider
-        $providerId = 'kpeu3i_jwt.security.authentication.provider.jwt.' . $id;
+        $providerId = 'kpeu3i_jwt.security.authentication.provider.' . $id;
         $container
-            ->setDefinition($providerId, new DefinitionDecorator('kpeu3i_jwt.security.authentication.provider.jwt'))
+            ->setDefinition($providerId, new DefinitionDecorator('kpeu3i_jwt.security.authentication.provider'))
             ->replaceArgument(0, new Reference($userProvider))
             ->replaceArgument(1, new Reference($usernameExtractorId))
             ->replaceArgument(2, new Reference($decoderId))
@@ -69,7 +69,7 @@ class JwtFactory implements SecurityFactoryInterface
         // Listener
         $listenerId = 'security.authentication.listener.kpeu3i_jwt.' . $id;
         $container
-            ->setDefinition($listenerId, new DefinitionDecorator('kpeu3i_jwt.security.authentication.listener.jwt'))
+            ->setDefinition($listenerId, new DefinitionDecorator('kpeu3i_jwt.security.authentication.listener'))
             ->replaceArgument(3, new Reference($tokenExtractorId))
         ;
 

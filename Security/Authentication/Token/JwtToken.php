@@ -36,6 +36,8 @@ class JwtToken extends AbstractToken
 
         $this->jwt = $jwt;
         $this->claims = $claims;
+
+        parent::setAuthenticated(true);
     }
 
     /**

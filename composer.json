@@ -1,5 +1,5 @@
 {
-    "name": "kepu3i/jwt-bundle",
+    "name": "kpeu3i/jwt-bundle",
     "type": "symfony-bundle",
     "description": "Integrates JWT authentication mechanism into Symfony applications",
     "keywords": ["symfony", "jwt", "jws"],
